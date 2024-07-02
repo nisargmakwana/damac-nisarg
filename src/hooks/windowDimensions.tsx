@@ -1,29 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-function getWindowDimensions() {
-	const { innerWidth: width, innerHeight: height } = window;
-	return { width, height };
-}
-
-function WindowDimensions() {
-	const [dimensions, setDimensions] = useState(
-		typeof window !== "undefined"
-			? getWindowDimensions()
-			: { width: 0, height: 0 }
-	);
+export function useWindowWidth(): number | null {
+	const [windowWidth, setWindowWidth] = useState<number | null>(null);
 
 	useEffect(() => {
-		if (typeof window === "undefined") return;
 		function handleResize() {
-			setDimensions(getWindowDimensions());
+			setWindowWidth(window.innerWidth);
 		}
 
+		// Set initial window width
+		handleResize();
+
+		// Add event listener
 		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
+
+		// Remove event listener on cleanup
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
 	}, []);
 
-	return dimensions;
+	return windowWidth;
 }
-
-export default WindowDimensions;

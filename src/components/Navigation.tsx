@@ -1,6 +1,6 @@
 "use client";
 import { Poppins } from "next/font/google";
-import WindowDimensions from "../hooks/WindowDimensions";
+import { useWindowWidth } from "@/hooks/WindowDimensions";
 const poppins = Poppins({
 	weight: ["400", "500", "700"],
 	subsets: ["latin"],
@@ -8,7 +8,11 @@ const poppins = Poppins({
 });
 
 const Navigation: React.FC = function () {
-	const { width } = WindowDimensions();
+	const width = useWindowWidth();
+
+	if (width === null) {
+		return null; // Handle initial state when windowWidth is not yet available
+	}
 	return (
 		<nav className="flex justify-between ">
 			<img
