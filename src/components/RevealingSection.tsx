@@ -19,14 +19,14 @@ const RevealingSection: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 				threshold: 0.3, // Adjust as needed
 			}
 		);
-
-		if (sectionRef.current) {
-			observer.observe(sectionRef.current);
+		const sRefCurrent = sectionRef.current;
+		if (sRefCurrent) {
+			observer.observe(sRefCurrent);
 		}
 
 		return () => {
-			if (sectionRef.current) {
-				observer.unobserve(sectionRef.current);
+			if (sRefCurrent) {
+				observer.unobserve(sRefCurrent);
 			}
 		};
 	}, []);

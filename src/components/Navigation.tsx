@@ -1,6 +1,6 @@
 "use client";
 import { Poppins } from "next/font/google";
-import { useWindowWidth } from "@/hooks/WindowDimensions";
+import { useWindowWidth } from "@/hooks/useWindowWidth";
 const poppins = Poppins({
 	weight: ["400", "500", "700"],
 	subsets: ["latin"],
